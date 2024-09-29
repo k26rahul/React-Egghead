@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        color: crimson;
+        font-family: 'Courier New', Courier, monospace;
+      }
+
+      .green {
+        color: green;
+      }
+    </style>
+    <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.min.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6.1/prop-types.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      const rootElement = document.getElementById('root');
+
+      function CharacterCount({ text }) {
+        const length = text.length ? <strong>{text.length}</strong> : 'No';
+        return (
+          <div className={text.length ? 'green' : null}>
+            The "{text}" has {length} chars
+          </div>
+        );
+      }
+
+      const element = (
+        <>
+          <CharacterCount text="hello"></CharacterCount>
+          <CharacterCount text=""></CharacterCount>
+        </>
+      );
+
+      ReactDOM.render(element, rootElement);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <p>Total <span id="event-count">0</span> events</p>
+      <p><button>Click me</button></p>
+      <p>Message is <span id="message"></span></p>
+      <p><input type="text" /></p>
+    </div>
+
+    <script>
+      let eventCountElem = document.getElementById('event-count');
+      let messageElem = document.getElementById('message');
+      let buttonElem = document.querySelector('button');
+      let inputElem = document.querySelector('input');
+
+      let count = 0;
+      function handleClick() {
+        eventCountElem.textContent = ++count;
+      }
+
+      function handleChange() {
+        messageElem.textContent = inputElem.value;
+      }
+
+      buttonElem.addEventListener('click', handleClick);
+      inputElem.addEventListener('keyup', handleChange);
+    </script>
+  </body>
+</html>

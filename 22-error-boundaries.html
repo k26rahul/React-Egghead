@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+    <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.min.js"></script>
+    <script src="https://unpkg.com/vanilla-tilt@1.7.0/dist/vanilla-tilt.min.js"></script>
+    <script src="https://unpkg.com/react-error-boundary@1.2.5/dist/umd/react-error-boundary.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      const rootElement = document.getElementById('root');
+      const ErrorBoundary = ReactErrorBoundary.ErrorBoundary;
+
+      // class ErrorBoundary extends React.Component {
+      //   state = { error: null };
+      //   static getDerivedStateFromError(error) {
+      //     return { error };
+      //   }
+      //   render() {
+      //     let { error } = this.state;
+      //     if (error) {
+      //       // return <div>Something very wrong happened: {error.message}</div>;
+      //       return <this.props.FallbackComponent error={error} />;
+      //     }
+      //     return this.props.children;
+      //   }
+      // }
+
+      function ErrorFallback({ error }) {
+        return <div>This is the error fallback: {error.message}</div>;
+      }
+
+      function Bomb() {
+        // throw new Error('Bomb: Explosion error');
+        return <div>KABOOM!!💥</div>;
+      }
+
+      function App() {
+        let [explode, setExplode] = React.useState(false);
+
+        console.log('App: render start');
+
+        if (explode) {
+          throw new Error('End of the world');
+        }
+
+        return (
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <div>
+              <div>
+                Let's do some explosions
+                <hr />
+                <button
+                  onClick={() => {
+                    setExplode(true);
+                  }}
+                >
+                  💣
+                </button>
+              </div>
+              <div>
+                {explode ? <Bomb /> : 'Push the button 😈'}
+                {
+                  // <ErrorBoundary FallbackComponent={ErrorFallback}>
+                  // </ErrorBoundary>
+                }
+              </div>
+            </div>
+          </ErrorBoundary>
+        );
+      }
+
+      ReactDOM.render(
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <App />
+        </ErrorBoundary>,
+        rootElement
+      );
+    </script>
+  </body>
+</html>
