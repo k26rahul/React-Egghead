@@ -24,20 +24,21 @@
         React.useEffect(() => {
           console.log('useEffect');
           localStorage.setItem('name', name);
-        });
+
+          return () => {
+            console.log('useEffect: cleanup');
+          };
+        }, [name]);
 
         let handleChange = event => setName(event.target.value);
+
+        console.log('Greeting: render');
 
         return (
           <div>
             <form>
-              <label htmlFor="name">Name: </label>
-              <input
-                value={name}
-                onChange={handleChange}
-                type="text"
-                id="name"
-              />
+              <label htmlFor='name'>Name: </label>
+              <input value={name} onChange={handleChange} type='text' id='name' />
             </form>
 
             <p>{name}</p>

@@ -26,11 +26,13 @@
 
         let handleChange = event => setName(event.target.value);
 
+        console.log('Greeting: render');
+
         return (
           <div>
             <form>
-              <label htmlFor="name">Name: </label>
-              <input type="text" value={name} onChange={handleChange} />
+              <label htmlFor='name'>Name: </label>
+              <input type='text' value={name} onChange={handleChange} />
             </form>
             <p>{name ? <strong>Hello {name}</strong> : 'Enter your name!'}</p>
           </div>
@@ -39,6 +41,8 @@
 
       function App() {
         let [count, setCount] = React.useState(0);
+
+        console.log('App: render');
 
         return (
           <>
